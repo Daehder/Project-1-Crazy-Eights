@@ -24,7 +24,7 @@ public class Hand {
 	}
 	
 	/**
-	 * Creates a player iwth a custom name
+	 * Creates a player with a custom name
 	 * 
 	 * @param name The name of the player
 	 */
@@ -50,6 +50,15 @@ public class Hand {
 	 */
 	public Card remove(int i) {
 		return hand.remove(i-1);
+	}
+	
+	/**
+	 * Returns how many card are in the hand
+	 * 
+	 * @return The number of cards in the hand
+	 */
+	public int size() {
+		return hand.size();
 	}
 	
 	/**
