@@ -79,7 +79,7 @@ public class Deck
 	/**
 	 * Picks the first card from the deck, removes if from the deck, increases top, and returns the card
 	 * 
-	 * @return
+	 * @return The card dealt
 	 */
 	public Card deal()
 	{
@@ -87,5 +87,14 @@ public class Deck
 	    deck[top] = null;
 	    top++;
 	    return r;
+	}
+
+	/**
+	 * Returns if the deck still has cards in it
+	 * 
+	 * @return If there are still cards in the deck
+	 */
+	public boolean empty() {
+		return top == deck.length;
 	}
 }
