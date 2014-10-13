@@ -1,5 +1,3 @@
-import java.util.*;
-
 /**
  * A simple deck object with an array of cards and method to print, shuffle and deal from the deck
  * 
