@@ -7,9 +7,30 @@ import java.util.ArrayList;
  */
 public class Hand {
 	private ArrayList<Card> hand;
+	private String name;
 	
 	public Hand() {
 		hand = new ArrayList<Card>();
+	}
+	
+	/**
+	 * Creates a numbered player
+	 * 
+	 * @param num The number of the player
+	 */
+	public Hand(int num) {
+		super();
+		name = "Player " + num;
+	}
+	
+	/**
+	 * Creates a player iwth a custom name
+	 * 
+	 * @param name The name of the player
+	 */
+	public Hand(String name) {
+		super();
+		name = name;
 	}
 	
 	/**
@@ -29,6 +50,15 @@ public class Hand {
 	 */
 	public Card remove(int i) {
 		return hand.remove(i-1);
+	}
+	
+	/**
+	 * Returns the player's name
+	 * 
+	 * @return The player's name
+	 */
+	public String name() {
+		return name;
 	}
 	
 	/**
