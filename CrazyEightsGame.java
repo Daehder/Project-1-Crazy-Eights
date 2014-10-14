@@ -10,6 +10,7 @@ public class CrazyEightsGame {
 	private Deck deck;	/** The deck that all the cards in the game come from */
 	private Hand p1;	/** Player 1's hand. The human player */
 	private Hand p2;	/** Player 2's hand. The computer player */
+	private Card lastCard;	/** The last card played */
 	
 	public CrazyEightsGame() {
 		Scanner in = new Scanner(System.in);
@@ -38,14 +39,16 @@ public class CrazyEightsGame {
 		deck.print();
 		deck.shuffle();
 		deck.print();
+		lastCard = deck.deal();	// Deal the first card to match
 		
 		// Creates and fills the hands
 		p1 = new Hand(1);
 		p2 = new Hand(2);
 		fillHands(p1, p2);
 		
-		boolean done = false;
 		while(!gameOver()) {
+			System.out.println("Here is your hand:\n");
+			p1.printHand();
 			
 		}
 		System.out.println("\nWould you like to play again?");
@@ -54,7 +57,7 @@ public class CrazyEightsGame {
 	/**
 	 * Checks to see if the deck ran out of cards or if one of the players won
 	 * 
-	 * @return Whether the gam is over
+	 * @return Whether the game is over
 	 */
 	private boolean gameOver() {
 		if(deck.empty())
