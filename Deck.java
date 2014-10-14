@@ -18,8 +18,8 @@ public class Deck
 		for(int i = 0; i < 52; i++)
 		{
 			String suit = null;
-			int val = i / 13;
-			int rank = i % 13;
+			int val = i / 13; 	//val is the suit
+			int rank = i % 13;	//Rank is face value
 			if (val == 0) suit = "Clubs";
 			else if (val == 1) suit = "Diamonds";
 			else if (val == 2) suit = "Hearts";
