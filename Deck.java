@@ -15,33 +15,16 @@ public class Deck
 	public Deck()
 	{
 		deck = new Card[52];
-		for(int i = 1; i <= 52; i++)
+		for(int i = 0; i < 52; i++)
 		{
-			String Suit = null;
-		    if(i >= 1 && i <= 13)
-		    {
-		    	Suit = "Clubs";
-			    Card a = new Card(Suit, i);
-			    deck[i - 1] = a;
-		    }
-		    else if(i >= 14 && i <= 26)
-		    {
-		    	Suit = "Diamonds";
-		        Card a = new Card(Suit, i - 13);
-		        deck[i - 1] = a;
-		    }
-		    else if(i >= 27 && i <= 39)
-		    {
-		        Suit = "Hearts";
-		        Card a = new Card(Suit, i - 26);
-		        deck[i - 1] = a;
-		    }
-		    else
-		    {
-		    	Suit = "Spades";
-                Card a = new Card(Suit, i - 39);
-                deck[i - 1] = a;
-		    }
+			String suit = null;
+			int val = i / 13;
+			int rank = i % 13;
+			if (val == 0) suit = "Clubs";
+			else if (val == 1) suit = "Diamonds";
+			else if (val == 2) suit = "Hearts";
+			else if (val == 3) suit = "Spades";
+			deck[i] = new Card(suit, rank);
 		}
 	}
 	
