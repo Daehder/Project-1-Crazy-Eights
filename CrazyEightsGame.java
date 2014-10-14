@@ -60,13 +60,13 @@ public class CrazyEightsGame {
 	 * @return Whether the game is over
 	 */
 	private boolean gameOver() {
-		if(deck.empty())
+		if(deck.isEmpty())
 			System.out.println("The deck ran out of cards. It's a tie.\n");
 		else if(p1.size() == 0)
 			System.out.println("You got rid of all your cards! You Won!\n");
 		else if(p2.size() == 0)
 			System.out.println("The computer got rid of all it's cards. Better luck next time.\n");
-		return deck.empty() || p1.size() == 0 || p2.size() == 0;
+		return (deck.isEmpty() || p1.size() == 0 || p2.size() == 0);
 	}
 
 	/**
