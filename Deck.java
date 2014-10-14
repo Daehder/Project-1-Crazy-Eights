@@ -7,7 +7,7 @@ public class Deck
 {
     // Creates the array for the deck of cards
 	private Card[] deck;
-	private int top;
+	private int deckSize = 52;
 
 	/**
 	 * Constructs a deck of cards, in order by suit then number
@@ -15,7 +15,7 @@ public class Deck
 	public Deck()
 	{
 		deck = new Card[52];
-		for(int i = 0; i < 52; i++)
+      		for(int i = 0; i < 52; i++)
 		{
 			String suit = null;
 			int val = i / 13; 	//val is the suit
@@ -24,7 +24,8 @@ public class Deck
 			else if (val == 1) suit = "Diamonds";
 			else if (val == 2) suit = "Hearts";
 			else if (val == 3) suit = "Spades";
-			deck[i] = new Card(suit, rank);
+        		deck[i] = new Card(suit, rank);
+			enqueue(new Card(suit, rank));
 		}
 	}
 	
@@ -33,11 +34,12 @@ public class Deck
 	 */
 	public void print()
 	{
-	    for (int c = top; c < 52; c++)
-	    {
-	        System.out.println(deck[c]);
-	    }
-	    System.out.println();     //adds an extra line for readability
+		Deck temp = this;
+		while (!(temp.isEmpty()))
+		{
+        		System.out.println(temp.dequeue());
+		}
+		System.out.println();     //adds an extra line for readability
 	}
 	
 	/**
@@ -45,18 +47,20 @@ public class Deck
 	 */
 	public void shuffle()
 	{
-	// uses a for look to go down the deck
-	    for(int c = 0; c < 52; c++)
-	    {
-	// picks a random number
-	        int cardToSwitch = (int)(Math.random() * 52);
-	// Store the cards at that original and random locations
-	        Card s = deck[cardToSwitch];
-            Card o = deck[c];
-	// Switches the random card with the card at the current location
-	        deck[cardToSwitch] = o;
-	        deck[c] = s;
-	    }
+		int x = deckSize;
+		ArrayList<Card> cards = new ArrayList<Card>();
+		while (!isEmpty())
+		{
+			cards.add(deal());
+		}
+		Deck temp = new Deck();
+		for (int i = 0; i < x; i++)
+		{
+			int randCard = (int)(Math.random() * cards.size());
+			temp.enqueue(cards.get(randCard));
+			cards.remove(randCard);
+		}
+      		set(temp);
 	}
 	
 	/**
@@ -66,18 +70,8 @@ public class Deck
 	 */
 	public Card deal()
 	{
-	    Card r = deck[top];
-	    deck[top] = null;
-	    top++;
+	    Card r = this.dequeue();
+	    deckSize--;
 	    return r;
-	}
-
-	/**
-	 * Returns if the deck still has cards in it
-	 * 
-	 * @return If there are still cards in the deck
-	 */
-	public boolean empty() {
-		return top == deck.length;
 	}
 }
