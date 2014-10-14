@@ -65,4 +65,15 @@ public class LQueue<T>
    {
       return (front == null);
    }
+   
+   //sets this LQueue to another LQueue
+   public void set(LQueue<T> q)
+   {
+      front = null;
+      end = null;
+      while (!(q.isEmpty()))
+      {
+         enqueue(q.dequeue());
+      }
+   }
 }
