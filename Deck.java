@@ -3,7 +3,9 @@
  * 
  * @author Erik
  */
-public class Deck
+import java.util.ArrayList;
+ 
+public class Deck extends LQueue
 {
     // Creates the array for the deck of cards
 	private Card[] deck;
@@ -70,7 +72,7 @@ public class Deck
 	 */
 	public Card deal()
 	{
-	    Card r = this.dequeue();
+	    Card r = (Card)(dequeue());
 	    deckSize--;
 	    return r;
 	}
