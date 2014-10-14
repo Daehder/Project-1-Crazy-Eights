@@ -1,3 +1,7 @@
+//LQueue will handle a live deck, allowing cards to be removed 
+//without having to handle a null chunk in an array.
+//Cards played will be removed, shuffling will restock the deck.
+
 import java.lang.RuntimeException;
 
 public class LQueue<T>
@@ -12,13 +16,13 @@ public class LQueue<T>
       }
    }
    
-   public static class MyException extends RuntimeException
+   public static class DeckEmptyException extends RuntimeException
    {
-      public MyException()
+      public DeckEmptyException()
       {
          super();
       }
-      public MyException(String message)
+      public DeckEmptyException(String message)
       {
          super(message);
       }
@@ -44,9 +48,9 @@ public class LQueue<T>
       }
    }
    
-   public T dequeue() throws MyException
+   public T dequeue() throws DeckEmptyException
    {
-      if (isEmpty()) throw new MyException();
+      if (isEmpty()) throw new DeckEmptyException();
       else
       {
          Node temp = front;
@@ -54,6 +58,8 @@ public class LQueue<T>
          return temp.element;
       }
    }
+   
+   //isEmpty will be used to check if the deck is empty.
    
    public boolean isEmpty()
    {
