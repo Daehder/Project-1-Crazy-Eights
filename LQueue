@@ -1,0 +1,62 @@
+import java.lang.RuntimeException;
+
+public class LQueue<T>
+{  
+   private class Node
+   {
+      public T element;
+      public Node next;
+      public Node(T element)
+      {
+         this.element = element;
+      }
+   }
+   
+   public static class MyException extends RuntimeException
+   {
+      public MyException()
+      {
+         super();
+      }
+      public MyException(String message)
+      {
+         super(message);
+      }
+   }
+   
+   private Node front;
+   private Node end;
+   
+   public LQueue(){}
+   
+   public void enqueue(T element)
+   {
+      Node temp = new Node(element);
+      if (isEmpty())
+      {
+         front = temp;
+         end = front;
+      }
+      else
+      {
+         temp.next = front;
+         front = temp;
+      }
+   }
+   
+   public T dequeue() throws MyException
+   {
+      if (isEmpty()) throw new MyException();
+      else
+      {
+         Node temp = front;
+         front = front.next;
+         return temp.element;
+      }
+   }
+   
+   public boolean isEmpty()
+   {
+      return (front == null);
+   }
+}
