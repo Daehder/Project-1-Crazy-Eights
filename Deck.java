@@ -5,7 +5,7 @@
  */
 import java.util.ArrayList;
  
-public class Deck extends LQueue
+public class Deck extends LQueue<Card>
 {
     // Creates the array for the deck of cards
 	private Card[] deck;
@@ -49,20 +49,11 @@ public class Deck extends LQueue
 	 */
 	public void shuffle()
 	{
-		int x = deckSize;
 		ArrayList<Card> cards = new ArrayList<Card>();
 		while (!isEmpty())
-		{
 			cards.add(deal());
-		}
-		Deck temp = new Deck();
-		for (int i = 0; i < x; i++)
-		{
-			int randCard = (int)(Math.random() * cards.size());
-			temp.enqueue(cards.get(randCard));
-			cards.remove(randCard);
-		}
-      		set(temp);
+		while(cards.size() > 0)
+			enqueue(cards.remove((int)(Math.random() * cards.size())));
 	}
 	
 	/**
