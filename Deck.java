@@ -20,7 +20,7 @@ public class Deck extends LQueue<Card>
       		for(int i = 0; i < 52; i++)
 		{
 			String suit = null;
-			int val = i / 13 + 1; 	//val is the suit
+			int val = i / 13; 	//val is the suit
 			int rank = i % 13 + 1;	//Rank is face value
 			if (val == 0) suit = "Clubs";
 			else if (val == 1) suit = "Diamonds";
