@@ -82,10 +82,10 @@
  	public String toString()
  	{
  		String output = null;
- 		if(value == 0) output = "Ace";
- 		else if(value == 10) output = "Jack";
- 		else if(value == 11) output = "Queen";
- 		else if(value == 12) output = "King";
+ 		if(value == 1) output = "Ace";
+ 		else if(value == 11) output = "Jack";
+ 		else if(value == 12) output = "Queen";
+ 		else if(value == 13) output = "King";
  		else output = "" + value;
  		return output + " of " + suit;
  	}

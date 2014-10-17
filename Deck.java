@@ -20,8 +20,8 @@ public class Deck extends LQueue<Card>
       		for(int i = 0; i < 52; i++)
 		{
 			String suit = null;
-			int val = i / 13; 	//val is the suit
-			int rank = i % 13;	//Rank is face value
+			int val = i / 13 + 1; 	//val is the suit
+			int rank = i % 13 + 1;	//Rank is face value
 			if (val == 0) suit = "Clubs";
 			else if (val == 1) suit = "Diamonds";
 			else if (val == 2) suit = "Hearts";
@@ -36,7 +36,8 @@ public class Deck extends LQueue<Card>
 	 */
 	public void print()
 	{
-		Deck temp = this;
+		Deck temp = new Deck();
+		temp.set(this);
 		while (!(temp.isEmpty()))
 		{
         		System.out.println(temp.dequeue());
