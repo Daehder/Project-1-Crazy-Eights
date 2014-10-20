@@ -11,7 +11,6 @@ public class Hand {
 	
 	public Hand() {
 		hand = new ArrayList<Card>();
-		System.out.println("Created an arraylist");
 	}
 	
 	/**
@@ -21,7 +20,6 @@ public class Hand {
 	 */
 	public Hand(int num) {
 		this();
-		System.out.println("Created player " + num);
 		name = "Player " + num;
 	}
 	
