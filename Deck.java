@@ -7,16 +7,15 @@ import java.util.ArrayList;
  
 public class Deck extends LQueue<Card>
 {
-    // Creates the array for the deck of cards
-	private Card[] deck;
-	private int deckSize = 52;
+	private int deckSize;
 
 	/**
 	 * Constructs a deck of cards, in order by suit then number
 	 */
 	public Deck()
 	{
-		deck = new Card[52];
+		deckSize = 0;
+		Card[] deck = new Card[52];
       		for(int i = 0; i < 52; i++)
 		{
 			String suit = null;
@@ -36,15 +35,9 @@ public class Deck extends LQueue<Card>
 	 */
 	public void print()
 	{
-		Deck temp = new Deck();
-		temp.set(this);
-		while (!(temp.isEmpty()))
-		{
-        		System.out.println(temp.dequeue());
-		}
-		System.out.println();     //adds an extra line for readability
+		printQueue();
 	}
-	
+
 	/**
 	 * Shuffles the deck
 	 */
@@ -52,7 +45,7 @@ public class Deck extends LQueue<Card>
 	{
 		ArrayList<Card> cards = new ArrayList<Card>();
 		while (!isEmpty())
-			cards.add(deal());
+			cards.add(dequeue());
 		while(cards.size() > 0)
 			enqueue(cards.remove((int)(Math.random() * cards.size())));
 	}
@@ -64,8 +57,32 @@ public class Deck extends LQueue<Card>
 	 */
 	public Card deal()
 	{
-	    Card r = (Card)(dequeue());
-	    deckSize--;
-	    return r;
+	    return dequeue();
+	}
+
+	/* (non-Javadoc)
+	 * @see LQueue#enqueue(java.lang.Object)
+	 */
+	@Override
+	public void enqueue(Card element) {
+		deckSize++;
+		super.enqueue(element);
+	}
+
+	/* (non-Javadoc)
+	 * @see LQueue#dequeue()
+	 */
+	@Override
+	public Card dequeue() throws LQueue.DeckEmptyException {
+		deckSize--;
+		return super.dequeue();
+	}
+
+	/* (non-Javadoc)
+	 * @see LQueue#isEmpty()
+	 */
+	@Override
+	public boolean isEmpty() {
+		return deckSize == 0;
 	}
 }

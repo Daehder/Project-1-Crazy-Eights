@@ -8,12 +8,22 @@ public class LQueue<T>
 {  
    private class Node
    {
-      public T element;
-      public Node next;
-      public Node(T element)
-      {
-         this.element = element;
-      }
+	   	public T element;
+      	public Node next;
+      	public Node(T element)
+      	{
+      		this.element = element;
+      	}
+      	
+      	/**
+      	 * Returns the toString of the Element.
+      	 * Used when printing elements
+      	 */
+      	@Override
+		public String toString() {
+      		return element.toString();
+      	}
+      
    }
    
    public static class DeckEmptyException extends RuntimeException
@@ -63,6 +73,23 @@ public class LQueue<T>
       return (front == null);
    }
    
+   /**
+    * Prints the whole queue recursively
+    */
+   public void printQueue() {
+	   print(front);
+   }
+   
+   /**
+    * Prints the next element and ,if there is another element, calls itself again
+    * 
+    * @param next The element to print
+    */
+   public void print(Node next) {
+	   System.out.println(next);	// Prints the current element
+	   if(next.next != null)		// If there is another card, print it
+		   print(next.next);
+   }
    
    /* Removed, as this simply transfers to this LQueue, does not copy
     * 
