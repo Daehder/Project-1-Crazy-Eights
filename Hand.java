@@ -11,6 +11,7 @@ public class Hand {
 	
 	public Hand() {
 		hand = new ArrayList<Card>();
+		System.out.println("Created an arraylist");
 	}
 	
 	/**
@@ -19,7 +20,8 @@ public class Hand {
 	 * @param num The number of the player
 	 */
 	public Hand(int num) {
-		super();
+		this();
+		System.out.println("Created player " + num);
 		name = "Player " + num;
 	}
 	
@@ -29,7 +31,7 @@ public class Hand {
 	 * @param name The name of the player
 	 */
 	public Hand(String name) {
-		super();
+		this();
 		this.name = name;
 	}
 	
