@@ -14,7 +14,7 @@ public class Deck extends LQueue<Card>
 	 */
 	public Deck()
 	{
-		deckSize = 0;
+		super();
 		Card[] deck = new Card[52];
       		for(int i = 0; i < 52; i++)
 		{
@@ -28,14 +28,6 @@ public class Deck extends LQueue<Card>
         		deck[i] = new Card(suit, rank);
 			enqueue(new Card(suit, rank));
 		}
-	}
-	
-	/**
-	 * Prints out the deck, starting at top
-	 */
-	public void print()
-	{
-		printQueue();
 	}
 
 	/**
@@ -58,31 +50,5 @@ public class Deck extends LQueue<Card>
 	public Card deal()
 	{
 	    return dequeue();
-	}
-
-	/* (non-Javadoc)
-	 * @see LQueue#enqueue(java.lang.Object)
-	 */
-	@Override
-	public void enqueue(Card element) {
-		deckSize++;
-		super.enqueue(element);
-	}
-
-	/* (non-Javadoc)
-	 * @see LQueue#dequeue()
-	 */
-	@Override
-	public Card dequeue() throws LQueue.DeckEmptyException {
-		deckSize--;
-		return super.dequeue();
-	}
-
-	/* (non-Javadoc)
-	 * @see LQueue#isEmpty()
-	 */
-	@Override
-	public boolean isEmpty() {
-		return deckSize == 0;
 	}
 }

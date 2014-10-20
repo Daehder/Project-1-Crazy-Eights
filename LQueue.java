@@ -39,12 +39,17 @@ public class LQueue<T>
    }
    
    private Node front;
+   private int size;
    
-   public LQueue(){}
+   public LQueue(){
+	   front = null;
+	   size = 0;
+   }
    
    public void enqueue(T element)
    {
-      Node temp = new Node(element);
+      size++;
+	  Node temp = new Node(element);
       if (isEmpty())
       {
          front = temp;
@@ -58,25 +63,24 @@ public class LQueue<T>
    
    public T dequeue() throws DeckEmptyException
    {
-      if (isEmpty()) throw new DeckEmptyException();
-      else
-      {
-         Node temp = front;
-         front = front.next;
-         return temp.element;
-      }
+      if (isEmpty()) 
+    	  throw new DeckEmptyException();
+      size--;
+      Node temp = front;
+      front = front.next;
+      return temp.element;
    }
    
    //isEmpty will be used to check if the deck is empty.
    public boolean isEmpty()
    {
-      return (front == null);
+      return size <= 0;
    }
    
    /**
     * Prints the whole queue recursively
     */
-   public void printQueue() {
+   public void print() {
 	   print(front);
    }
    
