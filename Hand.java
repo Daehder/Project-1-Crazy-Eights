@@ -30,7 +30,7 @@ public class Hand {
 	 */
 	public Hand(String name) {
 		super();
-		name = name;
+		this.name = name;
 	}
 	
 	/**

@@ -4,7 +4,7 @@
  * 
  * @author Erik Miller
  */
- public class Card implements Comparable
+ public class Card implements Comparable<Object>
  {
  	private String suit;
  	private int value;
