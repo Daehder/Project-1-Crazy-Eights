@@ -29,7 +29,6 @@ public class LQueue<T>
    }
    
    private Node front;
-   private Node end;
    
    public LQueue(){}
    
@@ -39,7 +38,6 @@ public class LQueue<T>
       if (isEmpty())
       {
          front = temp;
-         end = front;
       }
       else
       {
@@ -60,20 +58,21 @@ public class LQueue<T>
    }
    
    //isEmpty will be used to check if the deck is empty.
-   
    public boolean isEmpty()
    {
       return (front == null);
    }
    
-   //sets this LQueue to another LQueue
+   
+   /* Removed, as this simply transfers to this LQueue, does not copy
+    * 
+    * //sets this LQueue to another LQueue
    public void set(LQueue<T> q)
    {
       front = null;
-      end = null;
       while (!(q.isEmpty()))
       {
          enqueue(q.dequeue());
       }
-   }
+   }*/
 }
