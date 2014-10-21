@@ -1,0 +1,35 @@
+-Print greeting
+-Scan for response
+	-If 'q' then quit
+	-If 'p' then play
+	-If 'r' then rules
+	-If 'o' then options
+-Make a new deck
+	-Shuffle the deck
+-Deal 1 card to the stack
+-Create 2 hands (1 player, 1 ai)
+	-Fill both hands with 8 cards each
+
+Loop:
+-Print out player's hand
+-Print out number of cards left in deck
+-Print out the card on top of stack
+-Scan for response
+	-Sort by value (0)
+	-Sort by suit (1)
+	-If card can be played
+		-Play a card (P)
+		-Choose which card (1 -> Hand Size)
+			-If selected card cannot be played, print error message
+			-Otherwise 
+				-Set top of stack as played card
+				-Remove the card from the hand
+			-If 8 is played, scan for response
+				-Clubs (C)
+				-Diamonds (D)
+				-Hearts (H)
+				-Spades (S)
+	-If no card can be played, keep prompting to draw until a card can be played
+		-Draw a card (D)
+-AI's turn
+-Continue until gameOver() is true
