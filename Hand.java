@@ -10,7 +10,6 @@ public class Hand
 		hand = new ArrayList<Card>();
       name = "";
 	}
-<<<<<<< HEAD
 
 	public Hand(int num) 
    {
@@ -22,27 +21,6 @@ public class Hand
    {
       hand = new ArrayList<Card>();
 		name = name;
-=======
-	
-	/**
-	 * Creates a numbered player
-	 * 
-	 * @param num The number of the player
-	 */
-	public Hand(int num) {
-		this();
-		name = "Player " + num;
-	}
-	
-	/**
-	 * Creates a player with a custom name
-	 * 
-	 * @param name The name of the player
-	 */
-	public Hand(String name) {
-		this();
-		this.name = name;
->>>>>>> origin/master
 	}
 
 	public void add(Card c) 

@@ -53,12 +53,32 @@ public class CrazyEightsGame
             else if (res == 'r' || res == 'R') p1.sort(1);
             else if (hasPlay && (res == 'p' || res == 'P'))
             {
-               System.out.println("Choose a card from 1 - " + p1.size() + ": ");
-               int cardChoice = input.nextInt();
-               if (cardChoice >= 1 && cardChoice <= p1.size())
+               int cardChoice = -1;
+               while (cardChoice == -1)
                {
-                  if (p1.isPlayable(p1.get(cardChoice - 1), lastCard)) lastCard = p1.remove(cardChoice - 1);
-                  else System.out.println("Cannot be played");
+                  System.out.println("Choose a card from 1 - " + p1.size() + ": ");
+                  if (input.hasNextInt())
+                  {
+                     cardChoice = input.nextInt();
+                     if (cardChoice >= 1 && cardChoice <= p1.size())
+                     {
+                        if (p1.isPlayable(p1.get(cardChoice - 1), lastCard)) lastCard = p1.remove(cardChoice - 1);
+                        else 
+                        {
+                           System.out.println("Cannot be played");
+                           cardChoice = -1;
+                        }
+                     }
+                  }
+                  else 
+                  {
+                     System.out.println("Enter a valid choice");
+                     input.next();
+                  }
+               }
+               if (lastCard.getValue() == 7)
+               {
+                  crazyEight();
                }
             }
             else if (!hasPlay && (res == 'd' || res == 'D'))
@@ -72,7 +92,6 @@ public class CrazyEightsGame
             }
          }
       }
-      
       System.out.println("\nWould you like to play again?");
    }
    
@@ -123,5 +142,28 @@ public class CrazyEightsGame
       if (hasPlay) result += "(P)lay a card\n";
       else result += "(D)raw a card\n";
       System.out.println(result);
+   }
+   
+   private void crazyEight()
+   {
+      System.out.println("Would you like to change the suit to:\n" +
+                         "(C)lubs\n" +
+                         "(D)iamonds\n" +
+                         "(H)earts\n" +
+                         "(S)pades\n");
+      char res = 'x';
+      while (res == 'x')
+      {
+         res = input.next().charAt(0);
+         if (res == 'c' || res == 'C') lastCard = new Card(7);
+         else if (res == 'd' || res == 'D') lastCard = new Card(20);
+         else if (res == 'h' || res == 'H') lastCard = new Card(33);
+         else if (res == 's' || res == 'S') lastCard = new Card(46);
+         else
+         {
+            System.out.println("Not a valid suit");
+            res = 'x';
+         }
+      }
    }
 }
