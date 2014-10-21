@@ -85,6 +85,7 @@ public class CrazyEightsGame
             {
                p1.add(deck.deal());
             }
+            else if (res == 'q' || res == 'Q') return;
             else 
             {
                System.out.println("Not a valid response.");
@@ -142,6 +143,7 @@ public class CrazyEightsGame
                         "Sort by (S)uit\n";
       if (hasPlay) result += "(P)lay a card\n";
       else result += "(D)raw a card\n";
+      result += "(Q)uit to menu\n";
       System.out.println(result);
    }
    
