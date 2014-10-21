@@ -13,8 +13,6 @@ public class Deck extends LQueue<Card>
    public Deck()
    {
       inDeck = 0;
-      String suit;
-      int val, rank;
       for (int i = 0; i < DECK_SIZE; i++)
       {
          Card c = new Card(i);
@@ -35,21 +33,11 @@ public class Deck extends LQueue<Card>
    
    public void shuffle()
    {
-      int x = inDeck;
       ArrayList<Card> cards = new ArrayList<Card>();
       while (!isEmpty())
-      {
          cards.add(deal());
-      }
-      Deck temp = new Deck(0);
-      for (int i = 0; i < x; i++)
-      {
-         int randCard = (int)(Math.random() * cards.size());
-         temp.add(cards.get(randCard));
-         cards.remove(randCard);
-      }
-      set(temp);
-      inDeck = x;
+      while(cards.size() > 0)
+         add(cards.remove((int)(Math.random() * cards.size())));;
    }
    
    public Card deal()
