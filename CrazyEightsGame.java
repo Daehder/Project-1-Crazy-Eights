@@ -31,7 +31,7 @@ public class CrazyEightsGame
    {
       deck = new Deck();
       deck.shuffle();
-      lastCard = deck.deal();
+      lastCard = deck.dequeue();
       
       p1 = new Hand(1);
       p2 = new Hand(2);
@@ -41,7 +41,7 @@ public class CrazyEightsGame
       {
          System.out.println("\nHere is your hand:");
          p1.printHand();
-         System.out.println("\nThere are " + deck.getDeckSize() + " cards left in the deck.\n" +
+         System.out.println("\nThere are " + deck.getSize() + " cards left in the deck.\n" +
                             "The top card is " + lastCard);
          boolean hasPlay = p1.hasPlay(lastCard);
          printInGameMenu(hasPlay);
@@ -83,7 +83,7 @@ public class CrazyEightsGame
             }
             else if (!hasPlay && (res == 'd' || res == 'D'))
             {
-               p1.add(deck.deal());
+               p1.add(deck.dequeue());
             }
             else if (res == 'q' || res == 'Q') return;
             else 
@@ -94,7 +94,6 @@ public class CrazyEightsGame
          }
          artificialIntelligence();
       }
-      System.out.println("\nWould you like to play again?");
    }
    
    private boolean gameOver()
@@ -109,8 +108,8 @@ public class CrazyEightsGame
    {
       for (int i = 0; i < HAND_MAX_SIZE; i++)
       {
-         p1.add(deck.deal());
-         p2.add(deck.deal());
+         p1.add(deck.dequeue());
+         p2.add(deck.dequeue());
       }
    }
    

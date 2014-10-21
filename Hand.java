@@ -13,14 +13,14 @@ public class Hand
 
 	public Hand(int num) 
    {
-      hand = new ArrayList<Card>();
+      this();
 		name = "Player " + num;
 	}
 
 	public Hand(String name) 
    {
-      hand = new ArrayList<Card>();
-		name = name;
+      this();
+		this.name = name;
 	}
 
 	public void add(Card c) 

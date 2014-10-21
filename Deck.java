@@ -3,20 +3,14 @@ import java.util.ArrayList;
 public class Deck extends LQueue<Card>
 {
    private final int DECK_SIZE = 52;
-   private int inDeck;
    
-   public Deck(int n)
-   {
-      inDeck = 0;
-   }
+   public Deck(int n){}
    
    public Deck()
    {
-      inDeck = 0;
       for (int i = 0; i < DECK_SIZE; i++)
       {
-         Card c = new Card(i);
-         add(c);
+         enqueue(new Card(i));
       }
    }
    
@@ -36,29 +30,11 @@ public class Deck extends LQueue<Card>
       ArrayList<Card> cards = new ArrayList<Card>();
       while (!isEmpty())
       {
-         cards.add(deal());
+         cards.add(dequeue());
       }
       while (cards.size() > 0)
       {
-         add(cards.remove((int)(Math.random() * cards.size())));
+         enqueue(cards.remove((int)(Math.random() * cards.size())));
       }
-   }
-   
-   public Card deal()
-   {
-      Card r = (Card)(dequeue());
-      inDeck--;
-      return r;
-   }
-   
-   public void add(Card c)
-   {
-      enqueue(c);
-      inDeck++;
-   }
-   
-   public int getDeckSize()
-   {
-      return inDeck;
    }
 }

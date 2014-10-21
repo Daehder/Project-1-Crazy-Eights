@@ -11,6 +11,11 @@ public class LQueue<T>
       {
          this.element = element;
       }
+      
+      public String toString()
+      {
+         return element.toString();
+      }
    }
    
    public static class DeckEmptyException extends RuntimeException
@@ -26,9 +31,12 @@ public class LQueue<T>
    }
    
    private Node front;
-   private Node end;
+   private int size;
    
-   public LQueue(){}
+   public LQueue()
+   {
+      size = 0;
+   }
    
    public void enqueue(T element)
    {
@@ -36,13 +44,13 @@ public class LQueue<T>
       if (isEmpty())
       {
          front = temp;
-         end = front;
       }
       else
       {
          temp.next = front;
          front = temp;
       }
+      size++;
    }
    
    public T dequeue() throws DeckEmptyException
@@ -50,6 +58,7 @@ public class LQueue<T>
       if (isEmpty()) throw new DeckEmptyException();
       else
       {
+         size--;
          Node temp = front;
          front = front.next;
          return temp.element;
@@ -58,7 +67,7 @@ public class LQueue<T>
   
    public boolean isEmpty()
    {
-      return (front == null);
+      return (size == 0);
    }
    
    public Node getFront()
@@ -66,8 +75,8 @@ public class LQueue<T>
       return front;
    }
    
-   public Node getEnd()
+   public int getSize()
    {
-      return end;
+      return size;
    }
 }
