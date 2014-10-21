@@ -91,6 +91,7 @@ public class CrazyEightsGame
                res = 'x';
             }
          }
+         artificialIntelligence();
       }
       System.out.println("\nWould you like to play again?");
    }
@@ -165,5 +166,10 @@ public class CrazyEightsGame
             res = 'x';
          }
       }
+   }
+   
+   private void artificialIntelligence()
+   {
+      return;
    }
 }

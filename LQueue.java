@@ -60,20 +60,6 @@ public class LQueue<T>
    {
       return (front == null);
    }
-
-   public void set(LQueue<T> q)
-   {
-      ArrayList<T> arr = new ArrayList<T>();
-      while (!(q.isEmpty()))
-      {
-         arr.add(q.dequeue());
-      }
-      front = end = null;
-      for (T element : arr)
-      {
-         enqueue(element);
-      }
-   }
    
    public Node getFront()
    {
