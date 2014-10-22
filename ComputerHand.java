@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 /**
  * A class to handle computer turns
  * 
@@ -22,10 +24,9 @@ public class ComputerHand extends Hand {
 
 	}
 
-	@Override
-	protected void crazyEight() {
+	protected Card crazyEight(Scanner in) {
+		return null;
 		// TODO Auto-generated method stub
 		
 	}
-
 }

@@ -25,7 +25,7 @@ public abstract class Hand
 	}
 	
 	public abstract void takeTurn(Card lastCard, Deck deck);
-	protected abstract void crazyEight(Scanner in);
+	protected abstract Card crazyEight(Scanner in);
 	
 	public void add(Card c)
 	{

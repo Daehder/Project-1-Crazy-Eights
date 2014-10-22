@@ -57,7 +57,7 @@ public class HumanHand extends Hand {
 						cardChoice = in.nextInt();
 						if (cardChoice >= 1 && cardChoice <= hand.size())
 						{
-							if (isPlayable(get(cardChoice - 1), lastCard)) lastCard = hand.remove(cardChoice - 1);
+							if (isPlayable(hand.get(cardChoice - 1), lastCard)) lastCard = hand.remove(cardChoice - 1);
 							else
 							{
 								System.out.println("Cannot be played");
