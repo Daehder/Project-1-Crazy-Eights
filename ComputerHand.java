@@ -20,8 +20,9 @@ public class ComputerHand extends Hand {
 	}
 
 	@Override
-	public void takeTurn(Card lastCard, Deck deck) {
-
+	public Card takeTurn(Card lastCard, Deck deck) {
+		
+		return lastCard;
 	}
 
 	protected Card crazyEight(Scanner in) {

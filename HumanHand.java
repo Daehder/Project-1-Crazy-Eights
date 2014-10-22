@@ -30,60 +30,36 @@ public class HumanHand extends Hand {
 		super(name);
 	}
 
-	public void takeTurn(Card lastCard, Deck deck) {
+	public Card takeTurn(Card lastCard, Deck deck) {
 		Scanner in = new Scanner(System.in);
+		Card play = lastCard;
 		
 		printHand(lastCard);
+		printInGameMenu();
 		
-		char res = 'x';
-		while (res == 'x')
+		char response = 'x';
+		while (response == 'x')
 		{
-			res = in.next().charAt(0);
-			if (res == 's' || res == 'S')
-				sort(0);
-			else if (res == 'r' || res == 'R') 
-				sort(1);
-			else if ((res == 'p' || res == 'P'))
+			response = in.next().charAt(0);
+			sort(1);	// Sorts by number then Suit
+			sort(0);
+			if (response == 'p' || response == 'P')
 			{
-				int cardChoice = -1;
-				while (cardChoice == -1)
-				{
-					System.out.println("Choose a card from 1 - " + hand.size() + ": ");
-					if (in.hasNextInt())
-					{
-						cardChoice = in.nextInt();
-						if (cardChoice >= 1 && cardChoice <= hand.size())
-						{
-							if (isPlayable(hand.get(cardChoice - 1), lastCard)) lastCard = hand.remove(cardChoice - 1);
-							else
-							{
-								System.out.println("Cannot be played");
-								cardChoice = -1;
-							}
-						}
-					}
-					else
-					{
-						System.out.println("Enter a valid choice");
-						in.next();
-					}
-				}
-				if (lastCard.getValue() == 7)
-				{
-					lastCard = crazyEight(in);
-				}
+				play = playCard(getCard());
 			}
-			else if ((res == 'd' || res == 'D'))
+			else if ((response == 'd' || response == 'D'))
 			{
 				hand.add(deck.Deal());
 			}
-			else if (res == 'q' || res == 'Q') return;
+			else if (response == 'q' || response == 'Q') 
+				break;
 			else
 			{
-				System.out.println("Not a valid response.");
-				res = 'x';
+				System.out.println("Not a valid responseponse.");
+				response = 'x';
 			}
 		}
+		return play;
 	}
 	
 	protected Card crazyEight(Scanner in) {
@@ -92,23 +68,23 @@ public class HumanHand extends Hand {
 						   "(D)iamonds\n" +
 						   "(H)earts\n" +
 						   "(S)pades\n");
-		char res = 'x';
+		char response = 'x';
 		Card eight = null;
-		while (res == 'x')
+		while (response == 'x')
 		{
-			res = in.next().charAt(0);
-			if (res == 'c' || res == 'C') 
-				eight = new Card(7);			// Creates an 8 of Clubs
-			else if (res == 'd' || res == 'D') 
-				eight = new Card(20);			// Creates an 8 of Diamonds
-			else if (res == 'h' || res == 'H')
-				eight = new Card(33);			// Creates an 8 of Hearts
-			else if (res == 's' || res == 'S') 
-				eight = new Card(46);			// Creates an 8 of Spades
+			response = in.next().charAt(0);
+			if (response == 'c' || response == 'C') 
+				eight = new Card(7);			// Returns an 8 of Clubs
+			else if (response == 'd' || response == 'D') 
+				eight = new Card(20);			// Returns an 8 of Diamonds
+			else if (response == 'h' || response == 'H')
+				eight = new Card(33);			// Returns an 8 of Hearts
+			else if (response == 's' || response == 'S') 
+				eight = new Card(46);			// Returns an 8 of Spades
 			else
 			{
 				System.out.println("Not a valid suit");
-				res = 'x';
+				response = 'x';
 			}
 		}
 		return eight;
@@ -118,16 +94,43 @@ public class HumanHand extends Hand {
 		System.out.println("\nHere is your hand:");
 		super.printHand();
 		System.out.println("The top card is " + lastCard);
-		printInGameMenu();
 	}
 
 	
 	private void printInGameMenu()
 	{
-		System.out.println("\nSort by (R)ank\n" +
-							"Sort by (S)uit\n" + 
-							"(P)lay a card\n" + 
+		System.out.println("\n(P)lay a card\n" + 
 							"(D)raw a card\n" + 
 							"(Q)uit to menu\n");
 	}
 }
+
+
+/*
+int cardChoice = -1;
+while (cardChoice == -1)
+{
+	System.out.println("Choose a card from 1 - " + hand.size() + ": ");
+	if (in.hasNextInt())
+	{
+		cardChoice = in.nextInt();
+		if (cardChoice >= 1 && cardChoice <= hand.size())
+		{
+			if (isPlayable(hand.get(cardChoice - 1), lastCard)) lastCard = hand.remove(cardChoice - 1);
+			else
+			{
+				System.out.println("Cannot be played");
+				cardChoice = -1;
+			}
+		}
+	}
+	else
+	{
+		System.out.println("Enter a valid choice");
+		in.next();
+	}
+}
+if (lastCard.getValue() == 7)
+{
+	lastCard = crazyEight(in);
+}*/

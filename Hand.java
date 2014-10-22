@@ -24,7 +24,7 @@ public abstract class Hand
 		this.name = name;
 	}
 	
-	public abstract void takeTurn(Card lastCard, Deck deck);
+	public abstract Card takeTurn(Card lastCard, Deck deck);
 	protected abstract Card crazyEight(Scanner in);
 	
 	public void add(Card c)
