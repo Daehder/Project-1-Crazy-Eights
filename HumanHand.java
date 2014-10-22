@@ -33,11 +33,8 @@ public class HumanHand extends Hand {
 	public void takeTurn(Card lastCard, Deck deck) {
 		Scanner in = new Scanner(System.in);
 		
-		System.out.println("\nHere is your hand:");
-		printHand();
-		System.out.println("The top card is " + lastCard);
-		boolean hasPlay = hasPlay(lastCard);
-		printInGameMenu(hasPlay);
+		printHand(lastCard);
+		
 		char res = 'x';
 		while (res == 'x')
 		{
@@ -46,7 +43,7 @@ public class HumanHand extends Hand {
 				sort(0);
 			else if (res == 'r' || res == 'R') 
 				sort(1);
-			else if (hasPlay && (res == 'p' || res == 'P'))
+			else if ((res == 'p' || res == 'P'))
 			{
 				int cardChoice = -1;
 				while (cardChoice == -1)
@@ -76,7 +73,7 @@ public class HumanHand extends Hand {
 					lastCard = crazyEight(in);
 				}
 			}
-			else if (!hasPlay && (res == 'd' || res == 'D'))
+			else if ((res == 'd' || res == 'D'))
 			{
 				hand.add(deck.Deal());
 			}
@@ -101,13 +98,13 @@ public class HumanHand extends Hand {
 		{
 			res = in.next().charAt(0);
 			if (res == 'c' || res == 'C') 
-				eight = new Card(7);
+				eight = new Card(7);			// Creates an 8 of Clubs
 			else if (res == 'd' || res == 'D') 
-				eight = new Card(20);
-			else if (res == 'h' || res == 'H') 
-				eight = new Card(33);
+				eight = new Card(20);			// Creates an 8 of Diamonds
+			else if (res == 'h' || res == 'H')
+				eight = new Card(33);			// Creates an 8 of Hearts
 			else if (res == 's' || res == 'S') 
-				eight = new Card(46);
+				eight = new Card(46);			// Creates an 8 of Spades
 			else
 			{
 				System.out.println("Not a valid suit");
@@ -116,15 +113,21 @@ public class HumanHand extends Hand {
 		}
 		return eight;
 	}
+	
+	public void printHand(Card lastCard) {
+		System.out.println("\nHere is your hand:");
+		super.printHand();
+		System.out.println("The top card is " + lastCard);
+		printInGameMenu();
+	}
 
 	
-	private void printInGameMenu(boolean hasPlay)
+	private void printInGameMenu()
 	{
-		String result = "\nSort by (R)ank\n" +
-		"Sort by (S)uit\n";
-		if (hasPlay) result += "(P)lay a card\n";
-		else result += "(D)raw a card\n";
-		result += "(Q)uit to menu\n";
-		System.out.println(result);
+		System.out.println("\nSort by (R)ank\n" +
+							"Sort by (S)uit\n" + 
+							"(P)lay a card\n" + 
+							"(D)raw a card\n" + 
+							"(Q)uit to menu\n");
 	}
 }
