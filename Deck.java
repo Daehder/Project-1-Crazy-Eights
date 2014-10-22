@@ -9,9 +9,7 @@ public class Deck extends LQueue<Card>
    public Deck()
    {
       for (int i = 0; i < DECK_SIZE; i++)
-      {
          enqueue(new Card(i));
-      }
    }
    
    public void print()
@@ -29,12 +27,12 @@ public class Deck extends LQueue<Card>
    {
       ArrayList<Card> cards = new ArrayList<Card>();
       while (!isEmpty())
-      {
          cards.add(dequeue());
-      }
       while (cards.size() > 0)
-      {
          enqueue(cards.remove((int)(Math.random() * cards.size())));
-      }
+   }
+   
+   public Card Deal() {
+	   return dequeue();
    }
 }
