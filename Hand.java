@@ -1,6 +1,7 @@
 import java.util.ArrayList;
+import java.util.Scanner;
 
-public class Hand
+public abstract class Hand
 {
 	private ArrayList<Card> hand;
 	private String name;
@@ -23,27 +24,15 @@ public class Hand
 		this.name = name;
 	}
 	
+	public abstract void takeTurn(Card lastCard, Deck deck);
+	protected abstract void crazyEight(Scanner in);
+	
 	public void add(Card c)
 	{
 		if (c == null)
 			System.out.println("Out of cards");
 		else 
 			hand.add(c);
-	}
-	
-	public Card remove(int i)
-	{
-		return hand.remove(i);
-	}
-	
-	public Card get(int i)
-	{
-		return hand.get(i);
-	}
-	
-	public int size()
-	{
-		return hand.size();
 	}
 	
 	public String name()
@@ -116,5 +105,9 @@ public class Hand
 		return (a.getSuitValue() == b.getSuitValue()) ||
 			(a.getValue() == b.getValue()) ||
 			(a.getValue() == 7);
+	}
+
+	public int size() {
+		return hand.size();
 	}
 }
