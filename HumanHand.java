@@ -45,7 +45,7 @@ public class HumanHand extends Hand {
 			sort(0);
 			if (response == 'p' || response == 'P')
 			{
-				play = playCard(getCard());
+				play = playCards(lastCard, in);
 			}
 			else if ((response == 'd' || response == 'D'))
 			{
@@ -62,6 +62,32 @@ public class HumanHand extends Hand {
 		return play;
 	}
 	
+	/**
+	 * Gets cards to play, removes the from the hands, and returns the last card played
+	 * 
+	 * @return The last card played
+	 */
+	private Card playCards(Card lastCard, Scanner in) {
+		int cardNum = -1;
+		Card myCard = null;
+		boolean validPlay = true;
+		do {
+			System.out.println("Please enter the numbers of cards you want to play");
+			while(in.hasNextInt()) {
+				cardNum = in.nextInt();
+				do {
+					
+				} while(!isPlayable(myCard, lastCard));
+			}
+		}while(!validPlay);
+		return myCard;
+	}
+
+	private Card getCard(Scanner in) {
+		Card play = null;
+		return play;
+	}
+
 	protected Card crazyEight(Scanner in) {
 		System.out.println("Would you like to change the suit to:\n" +
 						   "(C)lubs\n" +
