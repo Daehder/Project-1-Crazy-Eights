@@ -42,7 +42,7 @@ public class CrazyEightsGame
 			System.out.println("\nHere is your hand:");
 			p1.printHand();
 			System.out.println("\nThere are " + deck.getSize() + " cards left in the deck.\n" +
-							   "The top card is " + lastCard);
+					   "The top card is " + lastCard);
 			boolean hasPlay = p1.hasPlay(lastCard);
 			printInGameMenu(hasPlay);
 			char res = 'x';
@@ -134,15 +134,15 @@ public class CrazyEightsGame
 	private void printMenu()
 	{
 		System.out.println("\n(P)lay\n" +
-						   "(R)ules\n" +
-						   "(O)ptions\n" +
-						   "(Q)uit");
+				     "(R)ules\n" +
+				     "(O)ptions\n" +
+				     "(Q)uit");
 	}
 	
 	private void printInGameMenu(boolean hasPlay)
 	{
 		String result = "\nSort by (R)ank\n" +
-		"Sort by (S)uit\n";
+				  "Sort by (S)uit\n";
 		if (hasPlay) result += "(P)lay a card\n";
 		else result += "(D)raw a card\n";
 		result += "(Q)uit to menu\n";
@@ -152,10 +152,10 @@ public class CrazyEightsGame
 	private void crazyEight()
 	{
 		System.out.println("Would you like to change the suit to:\n" +
-						   "(C)lubs\n" +
-						   "(D)iamonds\n" +
-						   "(H)earts\n" +
-						   "(S)pades\n");
+					"(C)lubs\n" +
+					"(D)iamonds\n" +
+					"(H)earts\n" +
+					"(S)pades\n");
 		char res = 'x';
 		while (res == 'x')
 		{
