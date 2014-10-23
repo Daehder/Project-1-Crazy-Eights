@@ -32,8 +32,10 @@ public class HumanHand extends Hand {
 
 	public Card takeTurn(Card lastCard, Deck deck) {
 		Scanner in = new Scanner(System.in);
-		Card play = lastCard;
-		
+		Card play = lastCard;		// Gets passed back to become the new lastCard
+									// set to lastCard so that if the user draws or quits, lastCard is passed back
+		sort(1);	// Sorts by number then Suit
+		sort(0);
 		printHand(lastCard);
 		printInGameMenu();
 		
@@ -41,8 +43,6 @@ public class HumanHand extends Hand {
 		while (response == 'x')
 		{
 			response = in.next().charAt(0);
-			sort(1);	// Sorts by number then Suit
-			sort(0);
 			if (response == 'p' || response == 'P')
 			{
 				play = playCards(lastCard, in);
@@ -68,24 +68,26 @@ public class HumanHand extends Hand {
 	 * @return The last card played
 	 */
 	private Card playCards(Card lastCard, Scanner in) {
-		int cardNum = -1;
-		Card myCard = null;
+		Card myCard;
+		Card test =  null;
 		boolean validPlay = true;
-		do {
+		
+		do {	// While the is not a valid play
 			System.out.println("Please enter the numbers of cards you want to play");
-			while(in.hasNextInt()) {
-				cardNum = in.nextInt();
-				do {
-					
-				} while(!isPlayable(myCard, lastCard));
+			myCard = lastCard;	// Compare to the top card on the burn pile
+			while(in.hasNextInt() && validPlay) {	// While there are still numbers the user has entered
+				test = hand.get(in.nextInt());
+				if(isPlayable(test, myCard))
+					myCard = test;
+				else{
+					validPlay = false;
+					myCard = lastCard;
+				}
 			}
 		}while(!validPlay);
+		
+		// Discard Cards from the hand
 		return myCard;
-	}
-
-	private Card getCard(Scanner in) {
-		Card play = null;
-		return play;
 	}
 
 	protected Card crazyEight(Scanner in) {
