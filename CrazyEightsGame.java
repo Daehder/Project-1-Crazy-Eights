@@ -128,7 +128,10 @@ public class CrazyEightsGame
 	
 	private void printGreeting()
 	{
-		System.out.println("Nice greeting here");
+		System.out.println("Welcome to Crazy Eights! by 'Get Decked' 2014");
+		System.out.println("A game where champions are made and losers get played,")
+		System.out.println("a game of luck & wit, see if you care for it.")
+		System.out.println("Follow the Directions below to get started.")
 	}
 	
 	private void printMenu()
