@@ -37,6 +37,8 @@ public class CrazyEightsGame
 		p2 = new Hand(2);
 		fillHands();
 		
+		//GameFrame game = new GameFrame(p1, p2, deck, lastCard);
+		
 		while (!gameOver())
 		{
 			System.out.println("\nHere is your hand:");
@@ -178,5 +180,19 @@ public class CrazyEightsGame
 	private void artificialIntelligence()
 	{
 		return;
+	}
+
+	public Hand getHand(int i) {
+		if(i == 1)
+			return p1;
+		return p2;
+	}
+
+	public Deck getDeck() {
+		return deck;
+	}
+
+	public Card getLastCard() {
+		return lastCard;
 	}
 }

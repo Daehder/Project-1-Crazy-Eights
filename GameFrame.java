@@ -13,9 +13,15 @@ public class GameFrame extends JFrame
    private JButton deck, card1, card2, card3, card4, card5, card6, card7, card8, card9, card10, card11, card12, card13, card14;
    private ArrayList<JButton> playerCards;
 
-   public GameFrame(Hand playerHand, hand computerHand, Deck deck)
+   public GameFrame(CrazyEightsGame game) {
+		this(game.getHand(1), game.getHand(2), game.getDeck(), game.getLastCard());
+	}
+
+public GameFrame(Hand playerHand, Hand computerHand, Deck deck, Card lastCard)
    {
-      private Card lastCard;
+   	
+   	JPanel panel = new JPanel();
+   	getContentPane().add(panel, BorderLayout.CENTER);
 
       setResizable(false);
       card1= new JButton("");
@@ -50,22 +56,22 @@ public class GameFrame extends JFrame
       playerCards.add(card14);
 
       yogaMat= new JPanel();
-      yogaMat.setPreferredSize(new Dimension(450, 150);
+      yogaMat.setPreferredSize(new Dimension(450, 150));
       yogaMat.setBorder(BorderFactory.createEtchedBorder());
       yogaMat.setLayout(new GridLayout(5, 1));
 
       noManMat= new JPanel();
-      noManMat.setPreferredSize(new Dimension(450, 150);
+      noManMat.setPreferredSize(new Dimension(450, 150));
       noManMat.setBorder(BorderFactory.createEtchedBorder());
       noManMat.setLayout(new GridLayout(5, 1));
 
       mouseMat= new JPanel();
-      mouseMat.setPreferredSize(new Dimension(450, 150);
+      mouseMat.setPreferredSize(new Dimension(450, 150));
       mouseMat.setBorder(BorderFactory.createEtchedBorder());
       mouseMat.setLayout(new GridLayout(5, 1));
 
       yogaMat= new JPanel();
-      yogaMat.setPreferredSize(new Dimension(450, 150);
+      yogaMat.setPreferredSize(new Dimension(450, 150));
       yogaMat.setBorder(BorderFactory.createEtchedBorder());
       yogaMat.setLayout(new GridLayout(5, 1));
 
@@ -73,18 +79,18 @@ public class GameFrame extends JFrame
       getContentPane().add(noManMat, BorderLayout.CENTER);
       getContentPane().add(mouseMat, BorderLayout.NORTH);
 
-      for(int i=0; i < (this.playerHand.size());i++)
+      for(int i=5; i > 0;i--)
       {
          final int z= i;
-         playerCards.get(i).setText(this.playerHand.get(i));
+         //playerCards.get(i).setText(this.playerHand.get(i));
          playerCards.get(i).setEnabled(true);
-         yogaMat.add(playerCards.get(i));
+         //yogaMat.add(playerCards.get(i));
 
          class play implements ActionListener
          {
             public void actionPerformed(ActionEvent event)
             {
-               play(z);
+               System.out.println("Playing");//play(z);
             }
 
          }
@@ -92,10 +98,10 @@ public class GameFrame extends JFrame
          playerCards.get(i).addActionListener(new play());
       }
    
-      for(int j=0; j < (this.computerHand.size());j++)
+      /*for(int j=0; j < (this.computerHand.size());j++)
       {
          mouseMat.add(computerCards.get(j));
-      }
+      }*/
 
       
 
