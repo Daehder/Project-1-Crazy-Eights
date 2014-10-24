@@ -125,13 +125,12 @@ public class HumanHand extends Hand {
 			in.nextLine();// Clears the input
 		}while(!validPlay);
 		
-		Collections.sort(cardPositions);	// Puts the card positions in order, then reverses it
-		Collections.reverse(cardPositions);
+		Collections.sort(cardPositions);	// Puts the card positions in order, then reverses it to prevent errors
+		Collections.reverse(cardPositions);	// with the fact that removing cards from arraylists will mess with the indices
 		
-		for(Integer i: cardPositions){
+		for(Integer i: cardPositions)	// Removes all the card to play from the hand
 			System.out.println("Playing " + hand.remove((int)i));	// Informs the player and removes the card from the hand
-		}
-		return myCard;
+		return myCard;	// Returns the last card played
 	}
 
 	protected Card crazyEight(Scanner in) {
