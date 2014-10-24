@@ -35,6 +35,14 @@ public abstract class Hand
 			hand.add(c);
 	}
 	
+	public Card get(int i) {
+		return hand.get(i);
+	}
+	
+	public int handSize(){
+		return hand.size();
+	}
+	
 	public String name()
 	{
 		return name;
