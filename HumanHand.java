@@ -58,7 +58,7 @@ public class HumanHand extends Hand {
 									"\n(E) to end your turn");
 				response = 'x';
 			}
-			else if (response == 'q' || response == 'Q' || response == 'e' || response == 'E' ) 
+			else if (response == 'e' || response == 'E' ) 
 				break;
 			else
 			{
@@ -72,7 +72,9 @@ public class HumanHand extends Hand {
 	
 	/**
 	 * Gets cards to play, removes the from the hands, and returns the last card played
-	 * Must follow the cards
+	 * Must follow the cards to play with a char
+	 * Just entering a char will exit back out to the menu
+	 * Users can also only use the cheat once per turn
 	 * 
 	 * @return The last card played
 	 */
@@ -87,11 +89,11 @@ public class HumanHand extends Hand {
 			myCard = lastCard;	// Compare to the top card on the burn pile
 			validPlay = true;	// Start a valid attempt
 			cardPositions = new ArrayList<Integer>();	// Create an empty cardPositions arraylist
-			while(in.hasNextInt() && validPlay) {	// While there are still numbers the user has entered
-				int nextInt = in.nextInt() - 1;	// The location in the hand of the card to play
+			int nextInt = 0;
+			while(in.hasNextInt() && validPlay && nextInt != -2) {	// While there are still numbers the user has entered (and they haven't cheated)
+				nextInt = in.nextInt() - 1;	// The location in the hand of the card to play
 				if(nextInt == -2) {	// If the user enters the cheat -1, play the first card
-					// Get first valid card
-					// Play it
+					cardPositions.add(0);
 				}
 				else if(nextInt >= 0 && nextInt < size()){
 					test = hand.get(nextInt);	// Get the card at that spot
