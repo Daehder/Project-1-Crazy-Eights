@@ -47,19 +47,22 @@ public class HumanHand extends Hand {
 						// If the played card is the same as the last card played, nothing has changed, so ask them to pick again
 					System.out.println("\nPlease choose another option:");
 					printInGameMenu();
-					continue;
+					response = 'x';
 				}
 			}
 			else if ((response == 'd' || response == 'D'))
 			{
 				add(deck.Deal());
-				System.out.println("Drew " + hand.get(hand.size() - 1));
+				System.out.println("Drew " + hand.get(hand.size() - 1) +
+									"\n(P) to play again or" +
+									"\n(E) to end your turn");
+				response = 'x';
 			}
-			else if (response == 'q' || response == 'Q') 
+			else if (response == 'q' || response == 'Q' || response == 'e' || response == 'E' ) 
 				break;
 			else
 			{
-				System.out.println("Not a valid responseponse.");
+				System.out.println("Not a valid response.");
 				response = 'x';
 			}
 		}
@@ -69,6 +72,7 @@ public class HumanHand extends Hand {
 	
 	/**
 	 * Gets cards to play, removes the from the hands, and returns the last card played
+	 * Must follow the cards
 	 * 
 	 * @return The last card played
 	 */
@@ -78,7 +82,7 @@ public class HumanHand extends Hand {
 		boolean validPlay = true;
 		ArrayList<Integer> cardPositions;
 		
-		System.out.println("Please enter the numbers of cards you want to play followed by (P), or (Q) to exit");
+		System.out.println("Please enter the numbers of cards you want to play followed by (P), or just a letter to exit to exit");
 		do {	// While the is not a valid play
 			myCard = lastCard;	// Compare to the top card on the burn pile
 			validPlay = true;	// Start a valid attempt
@@ -156,6 +160,6 @@ public class HumanHand extends Hand {
 	{
 		System.out.println("\n(P)lay a card\n" + 
 							"(D)raw a card\n" + 
-							"(Q)uit to menu\n");
+							"(E)to end your turn\n");
 	}
 }
