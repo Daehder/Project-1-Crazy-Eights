@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -7,8 +6,6 @@ import java.util.Scanner;
  * @author Erik
  */
 public class HumanHand extends Hand {
-	private ArrayList<Card> hand;
-	
 	/**
 	 * 
 	 */
@@ -46,10 +43,16 @@ public class HumanHand extends Hand {
 			if (response == 'p' || response == 'P')
 			{
 				play = playCards(lastCard, in);
+				if(lastCard.toString().equals(play.toString())) {	// Since Cards are not comparable, compare their strings
+						// If the played card is the same as the last card played, nothing has changed, so ask them to pick again
+					System.out.println("\nPlease choose another option:");
+					printInGameMenu();
+					continue;
+				}
 			}
 			else if ((response == 'd' || response == 'D'))
 			{
-				hand.add(deck.Deal());
+				add(deck.Deal());
 			}
 			else if (response == 'q' || response == 'Q') 
 				break;
@@ -71,19 +74,43 @@ public class HumanHand extends Hand {
 		Card myCard;
 		Card test =  null;
 		boolean validPlay = true;
+		char quit = 'n';
 		
 		do {	// While the is not a valid play
-			System.out.println("Please enter the numbers of cards you want to play");
+			System.out.println("Please enter the numbers of cards you want to play, or (Q) to choose a different action");
 			myCard = lastCard;	// Compare to the top card on the burn pile
+			validPlay = true;	// Start a valid attempt
 			while(in.hasNextInt() && validPlay) {	// While there are still numbers the user has entered
-				test = hand.get(in.nextInt());
-				if(isPlayable(test, myCard))
-					myCard = test;
-				else{
+				int nextInt = in.nextInt() - 1;	// The location in the hand of the card to play
+				if(nextInt == -2) {	// If the user enters the cheat -1, play the first card
+					// Get first valid card
+					// Play it
+				}
+				else if(nextInt >= 0 && nextInt < size()){
+					test = get(nextInt);	// Get the card at that spot
+					if(isPlayable(test, myCard)){
+						myCard = test;
+						System.out.println("Trying to play the " + test);
+					}
+					else{
+						validPlay = false;
+						myCard = lastCard;
+					}
+				}
+				else{	// If the card isn't in the hand, this isn't a valid play
+					System.out.println("That card is not in the hand");
 					validPlay = false;
 					myCard = lastCard;
 				}
 			}
+			try{	// If there is a next char, and it is q/Q, quit and return lastCard
+				quit = in.next().charAt(0);
+				if(quit == 'q' || quit == 'Q'){
+					myCard = lastCard;
+					validPlay = true;
+				}
+			}
+			catch(Exception e){}	// If there isn't a char, do nothing
 		}while(!validPlay);
 		
 		// Discard Cards from the hand
