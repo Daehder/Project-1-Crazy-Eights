@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 
 /**
@@ -32,15 +33,22 @@ public class HumanHand extends Hand {
 		Scanner in = new Scanner(System.in);
 		Card play = lastCard;		// Gets passed back to become the new lastCard
 									// set to lastCard so that if the user draws or quits, lastCard is passed back
-		sort(1);	// Sorts by number
-		printHand(lastCard);
-		printInGameMenu();
 		
 		char response = 'x';
 		while (response == 'x')
 		{
+			printHand(lastCard);
+			printInGameMenu();
 			response = in.next().charAt(0);
-			if (response == 'p' || response == 'P')
+			if (response == 's' || response == 'S'){
+				sort(0);
+				response = 'x';
+			}
+			else if (response == 'r' || response == 'R'){ 
+				sort(1);
+				response = 'x';
+			}
+			else if (response == 'p' || response == 'P')
 			{
 				play = playCards(lastCard, in);
 				if(lastCard.toString().equals(play.toString())) {	// Since Cards are not comparable, compare their strings
@@ -117,6 +125,9 @@ public class HumanHand extends Hand {
 			in.nextLine();// Clears the input
 		}while(!validPlay);
 		
+		Collections.sort(cardPositions);	// Puts the card positions in order, then reverses it
+		Collections.reverse(cardPositions);
+		
 		for(Integer i: cardPositions){
 			System.out.println("Playing " + hand.remove((int)i));	// Informs the player and removes the card from the hand
 		}
@@ -160,7 +171,9 @@ public class HumanHand extends Hand {
 	
 	private void printInGameMenu()
 	{
-		System.out.println("\n(P)lay a card\n" + 
+		System.out.println("\nSort by (S)uit\n" +
+							"Sort by (R)ank\n" +
+							"(P)lay a card\n" + 
 							"(D)raw a card\n" + 
 							"(E)to end your turn\n");
 	}
