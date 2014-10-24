@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public abstract class Hand
 {
-	private ArrayList<Card> hand;
+	protected ArrayList<Card> hand;
 	private String name;
 	
 	public Hand()
@@ -33,14 +33,6 @@ public abstract class Hand
 			System.out.println("Out of cards");
 		else 
 			hand.add(c);
-	}
-	
-	public Card get(int i) {
-		return hand.get(i);
-	}
-	
-	public int handSize(){
-		return hand.size();
 	}
 	
 	public String name()

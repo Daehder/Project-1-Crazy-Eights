@@ -31,8 +31,7 @@ public class HumanHand extends Hand {
 		Scanner in = new Scanner(System.in);
 		Card play = lastCard;		// Gets passed back to become the new lastCard
 									// set to lastCard so that if the user draws or quits, lastCard is passed back
-		sort(1);	// Sorts by number then Suit
-		sort(0);
+		sort(1);	// Sorts by number
 		printHand(lastCard);
 		printInGameMenu();
 		
@@ -53,6 +52,7 @@ public class HumanHand extends Hand {
 			else if ((response == 'd' || response == 'D'))
 			{
 				add(deck.Deal());
+				System.out.println("Drew " + hand.get(hand.size() - 1));
 			}
 			else if (response == 'q' || response == 'Q') 
 				break;
@@ -62,6 +62,7 @@ public class HumanHand extends Hand {
 				response = 'x';
 			}
 		}
+		System.out.println("Playing " + play + " and ending the turn");
 		return play;
 	}
 	
@@ -74,10 +75,9 @@ public class HumanHand extends Hand {
 		Card myCard;
 		Card test =  null;
 		boolean validPlay = true;
-		char quit = 'n';
 		
 		do {	// While the is not a valid play
-			System.out.println("Please enter the numbers of cards you want to play, or (Q) to choose a different action");
+			System.out.println("Please enter the numbers of cards you want to play followed by (P)");
 			myCard = lastCard;	// Compare to the top card on the burn pile
 			validPlay = true;	// Start a valid attempt
 			while(in.hasNextInt() && validPlay) {	// While there are still numbers the user has entered
@@ -87,7 +87,7 @@ public class HumanHand extends Hand {
 					// Play it
 				}
 				else if(nextInt >= 0 && nextInt < size()){
-					test = get(nextInt);	// Get the card at that spot
+					test = hand.get(nextInt);	// Get the card at that spot
 					if(isPlayable(test, myCard)){
 						myCard = test;
 						System.out.println("Trying to play the " + test);
@@ -98,21 +98,14 @@ public class HumanHand extends Hand {
 					}
 				}
 				else{	// If the card isn't in the hand, this isn't a valid play
-					System.out.println("That card is not in the hand");
+					System.out.println("That is not a card in the hand");
 					validPlay = false;
 					myCard = lastCard;
 				}
 			}
-			try{	// If there is a next char, and it is q/Q, quit and return lastCard
-				quit = in.next().charAt(0);
-				if(quit == 'q' || quit == 'Q'){
-					myCard = lastCard;
-					validPlay = true;
-				}
-			}
-			catch(Exception e){}	// If there isn't a char, do nothing
 		}while(!validPlay);
 		
+		System.out.println("Playing " + myCard + " and exiting");
 		// Discard Cards from the hand
 		return myCard;
 	}
@@ -159,33 +152,3 @@ public class HumanHand extends Hand {
 							"(Q)uit to menu\n");
 	}
 }
-
-
-/*
-int cardChoice = -1;
-while (cardChoice == -1)
-{
-	System.out.println("Choose a card from 1 - " + hand.size() + ": ");
-	if (in.hasNextInt())
-	{
-		cardChoice = in.nextInt();
-		if (cardChoice >= 1 && cardChoice <= hand.size())
-		{
-			if (isPlayable(hand.get(cardChoice - 1), lastCard)) lastCard = hand.remove(cardChoice - 1);
-			else
-			{
-				System.out.println("Cannot be played");
-				cardChoice = -1;
-			}
-		}
-	}
-	else
-	{
-		System.out.println("Enter a valid choice");
-		in.next();
-	}
-}
-if (lastCard.getValue() == 7)
-{
-	lastCard = crazyEight(in);
-}*/
