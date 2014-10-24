@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -75,11 +76,13 @@ public class HumanHand extends Hand {
 		Card myCard;
 		Card test =  null;
 		boolean validPlay = true;
+		ArrayList<Integer> cardPositions;
 		
+		System.out.println("Please enter the numbers of cards you want to play followed by (P), or (Q) to exit");
 		do {	// While the is not a valid play
-			System.out.println("Please enter the numbers of cards you want to play followed by (P)");
 			myCard = lastCard;	// Compare to the top card on the burn pile
 			validPlay = true;	// Start a valid attempt
+			cardPositions = new ArrayList<Integer>();	// Create an empty cardPositions arraylist
 			while(in.hasNextInt() && validPlay) {	// While there are still numbers the user has entered
 				int nextInt = in.nextInt() - 1;	// The location in the hand of the card to play
 				if(nextInt == -2) {	// If the user enters the cheat -1, play the first card
@@ -91,8 +94,10 @@ public class HumanHand extends Hand {
 					if(isPlayable(test, myCard)){
 						myCard = test;
 						System.out.println("Trying to play the " + test);
+						cardPositions.add(nextInt);
 					}
 					else{
+						System.out.println("Cannot play " + test + ". Please try another set of cards");
 						validPlay = false;
 						myCard = lastCard;
 					}
@@ -103,10 +108,12 @@ public class HumanHand extends Hand {
 					myCard = lastCard;
 				}
 			}
+			in.nextLine();// Clears the input
 		}while(!validPlay);
 		
-		System.out.println("Playing " + myCard + " and exiting");
-		// Discard Cards from the hand
+		for(Integer i: cardPositions){
+			System.out.println("Playing " + hand.remove((int)i));	// Informs the player and removes the card from the hand
+		}
 		return myCard;
 	}
 
