@@ -9,6 +9,7 @@ import java.util.Scanner;
 public class ComputerHand extends Hand {
 	private ArrayList<Card> hand;
 	private ArrayList<Card> playableCards;
+	private ArrayList<Card> eights;
 	private ArrayList<Card> combination;
 	private ArrayList<Card> highestCombination;
 
@@ -29,10 +30,14 @@ public class ComputerHand extends Hand {
 	//Function searches though hand for cards that are playable
 	public void findPlayableCards(ArrayList<Card> hand, Card lastCard){
 		playableCards = new ArrayList<Card>();
+		eights = new ArrayList<Card>();
 		System.out.println(hand);
 		for(Card card: hand){
-			if(card.getSuitValue() == lastCard.getSuitValue() || card.getValue() == lastCard.getValue()){
-				System.out.println(card);
+			if(card.getValue() == 8){
+				eights.add(card);
+			}
+			else if(card.getSuitValue() == lastCard.getSuitValue() || card.getValue() == lastCard.getValue()){
+				//System.out.println(card);
 				playableCards.add(card);
 			}
 		}
@@ -44,15 +49,41 @@ public class ComputerHand extends Hand {
 		findPlayableCards(hand, lastCard);
 		
 		//Add a parameter for max draw.
-		while(playableCards.isEmpty()){
+		while(playableCards.isEmpty() && eights.isEmpty()){
 			hand.add(deck.Deal());
 			findPlayableCards(hand, lastCard);
+			
 		}
 		
 		int play;
-		play = 1; //Change to random function
+		play = 0; //Change to random function
 		switch (play){
-		
+		//Play an eight
+		case 0:
+			//If only an eight can be played, find which suit hand contains the most of and make the 8 that type.
+			if(playableCards.isEmpty() && !eights.isEmpty()){
+				int suitCount = 0;
+				int highestSuitCount = 0;
+				int newEightSuitValue = 0;
+				for(int i = 0; i < 3; i++){
+					for(Card card: hand){
+						if(card.getSuitValue() == i && !(card.getValue() == 8)){
+							suitCount++;
+						}
+					}
+					if(suitCount > highestSuitCount){
+						highestSuitCount = suitCount;
+						newEightSuitValue = i;
+					}
+				}
+				hand.remove(eights.get(0));
+				Card newEight = new Card((newEightSuitValue * 13) + 7);
+				System.out.println("New Eight: " + newEight.toString());
+				System.out.println("Card to Play:" + newEight);
+				eights.remove(0);
+				return newEight;
+			}
+			
 		// Play highest amount
 		case 1:
 			int highComboCount = 0;
@@ -102,7 +133,7 @@ public class ComputerHand extends Hand {
 		}
 		
 		
-		
+		System.out.println("DID NOT PLAY");
 		return lastCard;
 	}
 
