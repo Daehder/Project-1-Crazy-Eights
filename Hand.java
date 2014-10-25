@@ -105,7 +105,7 @@ public class Hand
 	
 	public boolean hasPlay(Card c)
 	{
-		for (Card inHand: hand)
+		for (Card inHand : hand)
 			if (isPlayable(inHand, c)) 
 				return true;
 		return false;
@@ -117,4 +117,16 @@ public class Hand
 			(a.getValue() == b.getValue()) ||
 			(a.getValue() == 7);
 	}
+   
+   public int firstPlayableLocation(Card c)
+   {
+      for (int i = 0; i < size(); i++)
+      {
+         if (isPlayable(get(i), c))
+         {
+            return i;
+         }
+      }
+      return -1;
+   }
 }

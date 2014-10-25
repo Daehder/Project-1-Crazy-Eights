@@ -64,7 +64,11 @@ public class CrazyEightsGame
 							cardChoice = input.nextInt();
 							if (cardChoice >= 1 && cardChoice <= p1.size())
 							{
-								if (p1.isPlayable(p1.get(cardChoice - 1), lastCard)) lastCard = p1.remove(cardChoice - 1);
+								if (p1.isPlayable(p1.get(cardChoice - 1), lastCard)) 
+                        {
+                           lastCard = p1.remove(cardChoice - 1);
+                           System.out.println("\nYou just played the " + lastCard);
+                        }
 								else
 								{
 									System.out.println("Cannot be played");
@@ -94,8 +98,28 @@ public class CrazyEightsGame
 					res = 'x';
 				}
 			}
-			artificialIntelligence();
+         if (res == 'p' || res == 'P') lastCard = artificialIntelligence(deck, p2, lastCard);
 		}
+	}
+   
+   private Card artificialIntelligence(Deck d, Hand p2, Card lastCard)
+	{
+      System.out.println(p2.name() + " has " + p2.size() + " cards in their hand.");
+		if (p2.hasPlay(lastCard))
+      {
+         int loc = p2.firstPlayableLocation(lastCard);
+         Card c = p2.remove(loc);
+         System.out.println(p2.name() + " played the " + c);
+         System.out.println(p2.name() + " has " + p2.size() + " cards in their hand.");
+         return c;
+      }
+      else 
+      {
+         System.out.println(p2.name() + " drew a card.");
+         p2.add(d.dequeue());
+         System.out.println(p2.name() + " has " + p2.size() + " cards in their hand.");
+         return lastCard;
+      }
 	}
 	
 	private boolean gameOver()
@@ -175,11 +199,6 @@ public class CrazyEightsGame
 				res = 'x';
 			}
 		}
-	}
-	
-	private void artificialIntelligence()
-	{
-		return;
 	}
 
 	public Hand getHand(int i) {
