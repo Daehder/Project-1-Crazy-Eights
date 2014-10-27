@@ -12,6 +12,8 @@ public class ComputerHand extends Hand {
 	private ArrayList<Card> eights;
 	private ArrayList<Card> combination;
 	private ArrayList<Card> highestCombination;
+	private Card lastPlayedCard;
+	private int prefSuit;
 
 
 	public ComputerHand() {
@@ -21,6 +23,7 @@ public class ComputerHand extends Hand {
 	public ComputerHand(int num) {
 		super(num);
 		hand = super.hand;
+		lastPlayedCard = new Card(-1);
 	}
 
 	public ComputerHand(String name) {
@@ -58,7 +61,11 @@ public class ComputerHand extends Hand {
 		int play;
 		play = 0; 
 		if(playableCards.isEmpty() && eights.isEmpty()){
-			play = 3;
+			play = 4;
+		}
+		if(lastPlayedCard.getRank() == lastCard.getRank()){
+			//Opponent passed and does not have the rank of this card
+			prefSuit = lastPlayedCard.getSuitValue();
 		}
 		switch (play){
 		//Play an eight
@@ -84,6 +91,7 @@ public class ComputerHand extends Hand {
 //				System.out.println("New Eight: " + newEight.toString());
 //				System.out.println("Card to Play:" + newEight);
 				eights.remove(0);
+				lastPlayedCard = newEight;
 				return newEight;
 			}
 			
@@ -121,18 +129,30 @@ public class ComputerHand extends Hand {
 //					System.out.print(card + ", ");
 				}
 //				System.out.print("\n");
+				lastPlayedCard = playableCards.get(0);
 				return playableCards.get(0);
 			}
 			
+		//Play a suit they don't have
+		case 2:
+			for(Card card: playableCards){
+				if(card.getSuitValue() == prefSuit){
+					hand.remove(card);
+					return card;
+				}
+			}
+			
 		//Play first
-		case 2: 
+		case 3: 
 //			System.out.println("Card to Play:" + playableCards.get(0));
 			hand.remove(playableCards.get(0));
+			lastPlayedCard = playableCards.get(0);
 			return playableCards.get(0);
 				
 		//PASS
-		case 3:
+		case 4:
 //			System.out.println("PASS");
+			lastPlayedCard = lastCard;
 			return lastCard;
 			
 		default:
@@ -141,6 +161,7 @@ public class ComputerHand extends Hand {
 		
 		
 //		System.out.println("PASS");
+		lastPlayedCard = lastCard;
 		return lastCard;
 	}
 
