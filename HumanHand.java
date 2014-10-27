@@ -105,7 +105,12 @@ public class HumanHand extends Hand {
 				}
 				else if(nextInt >= 0 && nextInt < size()){
 					test = hand.get(nextInt);	// Get the card at that spot
-					if(isPlayable(test, myCard)){
+					if(test.getValue() == 7){	// If the card is an 8
+						myCard = crazyEight(in);
+						System.out.println("Trying to play the " + test);
+						cardPositions.add(nextInt);
+					}
+					else if(isPlayable(test, myCard)){
 						myCard = test;
 						System.out.println("Trying to play the " + test);
 						cardPositions.add(nextInt);
@@ -133,7 +138,7 @@ public class HumanHand extends Hand {
 		return myCard;	// Returns the last card played
 	}
 
-	protected Card crazyEight(Scanner in) {
+	private Card crazyEight(Scanner in) {
 		System.out.println("Would you like to change the suit to:\n" +
 						   "(C)lubs\n" +
 						   "(D)iamonds\n" +
