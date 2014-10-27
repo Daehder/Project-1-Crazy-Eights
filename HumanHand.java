@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Scanner;
 
 /**
@@ -90,30 +89,30 @@ public class HumanHand extends Hand {
 		Card myCard;
 		Card test =  null;
 		boolean validPlay = true;
-		ArrayList<Integer> cardPositions;
+		ArrayList<Card> cardsToPlay;
 		
 		System.out.println("Please enter the numbers of cards you want to play followed by (P), or just a letter to exit to exit");
 		do {	// While the is not a valid play
 			myCard = lastCard;	// Compare to the top card on the burn pile
 			validPlay = true;	// Start a valid attempt
-			cardPositions = new ArrayList<Integer>();	// Create an empty cardPositions arraylist
+			cardsToPlay = new ArrayList<Card>();	// Create an empty cardPositions arraylist
 			int nextInt = 0;
 			while(in.hasNextInt() && validPlay && nextInt != -2) {	// While there are still numbers the user has entered (and they haven't cheated)
 				nextInt = in.nextInt() - 1;	// The location in the hand of the card to play
 				if(nextInt == -2) {	// If the user enters the cheat -1, play the first card
-					cardPositions.add(0);
+					cardsToPlay.add(hand.get(0));
 				}
 				else if(nextInt >= 0 && nextInt < size()){
 					test = hand.get(nextInt);	// Get the card at that spot
 					if(test.getValue() == 7){	// If the card is an 8
 						myCard = crazyEight(in);
 						System.out.println("Trying to play the " + test);
-						cardPositions.add(nextInt);
+						cardsToPlay.add(myCard);
 					}
 					else if(isPlayable(test, myCard)){
 						myCard = test;
 						System.out.println("Trying to play the " + test);
-						cardPositions.add(nextInt);
+						cardsToPlay.add(myCard);
 					}
 					else{
 						System.out.println("Cannot play " + test + ". Please try another set of cards");
@@ -130,11 +129,8 @@ public class HumanHand extends Hand {
 			in.nextLine();// Clears the input
 		}while(!validPlay);
 		
-		Collections.sort(cardPositions);	// Puts the card positions in order, then reverses it to prevent errors
-		Collections.reverse(cardPositions);	// with the fact that removing cards from arraylists will mess with the indices
-		
-		for(Integer i: cardPositions)	// Removes all the card to play from the hand
-			System.out.println("Playing " + hand.remove((int)i));	// Informs the player and removes the card from the hand
+		for(Card c: cardsToPlay)	// Removes all the card to play from the hand
+			System.out.println("Playing " + hand.remove(c));	// Informs the player and removes the card from the hand
 		return myCard;	// Returns the last card played
 	}
 
