@@ -41,7 +41,6 @@ public class CrazyEightsGame
 		{
 			lastCard = p1.takeTurn(lastCard, deck);
 			lastCard = p2.takeTurn(lastCard, deck);
-			break;
 		}
 	}
 	
