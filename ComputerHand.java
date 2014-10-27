@@ -48,7 +48,6 @@ public class ComputerHand extends Hand {
 		System.out.println("Last Card Played: " + lastCard);
 		findPlayableCards(hand, lastCard);
 		
-		//Add a parameter for max draw.
 		int drawNum = 0;
 		while(playableCards.isEmpty() && eights.isEmpty() && drawNum < 3){
 			hand.add(deck.Deal());
@@ -57,7 +56,10 @@ public class ComputerHand extends Hand {
 		}
 		
 		int play;
-		play = 0; //Change to random function
+		play = 0; 
+		if(playableCards.isEmpty() && eights.isEmpty()){
+			play = 3;
+		}
 		switch (play){
 		//Play an eight
 		case 0:
@@ -127,7 +129,11 @@ public class ComputerHand extends Hand {
 			System.out.println("Card to Play:" + playableCards.get(0));
 			hand.remove(playableCards.get(0));
 			return playableCards.get(0);
-						
+				
+		//PASS
+		case 3:
+			System.out.println("PASS");
+			return lastCard;
 			
 		default:
 			break;
