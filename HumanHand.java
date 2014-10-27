@@ -81,7 +81,6 @@ public class HumanHand extends Hand {
 				response = 'x';
 			}
 		}
-		System.out.println("Playing " + play + " and ending the turn");
 		return play;
 	}
 	
@@ -94,21 +93,22 @@ public class HumanHand extends Hand {
 	 * @return The last card played
 	 */
 	private Card playCards(Card lastCard, Scanner in) {
-		Card myCard;
-		Card test =  null;
-		boolean validPlay = true;
-		ArrayList<Card> cardsToPlay;
+		Card myCard;		// The local last played card
+		Card test;			// The card to check against myCard
+		boolean validPlay = true;	// Whether this is a valid play or not
+		ArrayList<Card> cardsToPlay;	// The arrayList of cards to play
 		
 		System.out.println("Please enter the numbers of cards you want to play followed by (P), or just a letter to exit to exit");
 		do {	// While the is not a valid play
 			myCard = lastCard;	// Compare to the top card on the burn pile
 			validPlay = true;	// Start a valid attempt
-			cardsToPlay = new ArrayList<Card>();	// Create an empty cardPositions arraylist
+			cardsToPlay = new ArrayList<Card>();	// Create an empty arraylist of cards
 			int nextInt = 0;
 			while(in.hasNextInt() && validPlay && nextInt != -2) {	// While there are still numbers the user has entered (and they haven't cheated)
 				nextInt = in.nextInt() - 1;	// The location in the hand of the card to play
-				if(nextInt == -2) {	// If the user enters the cheat -1, play the first card
+				if(nextInt == -2) {	// If the user enters the cheat -1, plays the first card in their hand
 					cardsToPlay.add(hand.get(0));
+					myCard = hand.get(0);
 				}
 				else if(nextInt >= 0 && nextInt < size()){
 					test = hand.get(nextInt);	// Get the card at that spot
@@ -117,8 +117,8 @@ public class HumanHand extends Hand {
 						System.out.println("Trying to play the " + test);
 						cardsToPlay.add(myCard);
 					}
-					else if(isPlayable(test, myCard)){
-						myCard = test;
+					else if(isPlayable(test, myCard)){	// If test is playable
+						myCard = test;					// Set the last played card
 						System.out.println("Trying to play the " + test);
 						cardsToPlay.add(myCard);
 					}
@@ -137,8 +137,10 @@ public class HumanHand extends Hand {
 			in.nextLine();// Clears the input
 		}while(!validPlay);
 		
-		for(Card c: cardsToPlay)	// Removes all the card to play from the hand
-			System.out.println("Playing " + hand.remove(c));	// Informs the player and removes the card from the hand
+		for(Card c: cardsToPlay){	// Removes all the card to play from the hand
+			System.out.println("Playing " + c);	// Informs the player and removes the card from the hand
+			hand.remove(c);
+		}
 		return myCard;	// Returns the last card played
 	}
 

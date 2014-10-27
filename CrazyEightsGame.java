@@ -18,12 +18,14 @@ public class CrazyEightsGame
 			printMenu();
 			status = input.next().charAt(0);
 			if (status == 'q' || status == 'Q') continue;
-			else if (status == 'p' || status == 'P') play();
+			else if (status == 'p' || status == 'P') { 
+				play();
+				System.out.println("\nWould you like to play again?");
+			}
 			else if (status == 'r' || status == 'R') rules();
 			else if (status == 'o' || status == 'O') options();
 			else System.out.println("Please enter a valid selection");
 		}
-		
 		System.out.println("Thank you for playing!");
 	}
 	
