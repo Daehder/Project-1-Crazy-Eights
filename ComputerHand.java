@@ -31,7 +31,7 @@ public class ComputerHand extends Hand {
 	public void findPlayableCards(ArrayList<Card> hand, Card lastCard){
 		playableCards = new ArrayList<Card>();
 		eights = new ArrayList<Card>();
-		System.out.println(hand);
+//		System.out.println(hand);
 		for(Card card: hand){
 			if(card.getValue() == 8){
 				eights.add(card);
@@ -45,7 +45,7 @@ public class ComputerHand extends Hand {
 
 	@Override
 	public Card takeTurn(Card lastCard, Deck deck) {
-		System.out.println("Last Card Played: " + lastCard);
+//		System.out.println("Last Card Played: " + lastCard);
 		findPlayableCards(hand, lastCard);
 		
 		int drawNum = 0;
@@ -81,8 +81,8 @@ public class ComputerHand extends Hand {
 				}
 				hand.remove(eights.get(0));
 				Card newEight = new Card((newEightSuitValue * 13) + 7);
-				System.out.println("New Eight: " + newEight.toString());
-				System.out.println("Card to Play:" + newEight);
+//				System.out.println("New Eight: " + newEight.toString());
+//				System.out.println("Card to Play:" + newEight);
 				eights.remove(0);
 				return newEight;
 			}
@@ -115,24 +115,24 @@ public class ComputerHand extends Hand {
 			}
 			if(highestCombination.size() > 1){
 				findPlayableCards(highestCombination, lastCard);
-				System.out.print("Cards to play:");
+//				System.out.print("Cards to play:");
 				for(Card card: highestCombination){
 					hand.remove(card);
-					System.out.print(card + ", ");
+//					System.out.print(card + ", ");
 				}
-				System.out.print("\n");
+//				System.out.print("\n");
 				return playableCards.get(0);
 			}
 			
 		//Play first
 		case 2: 
-			System.out.println("Card to Play:" + playableCards.get(0));
+//			System.out.println("Card to Play:" + playableCards.get(0));
 			hand.remove(playableCards.get(0));
 			return playableCards.get(0);
 				
 		//PASS
 		case 3:
-			System.out.println("PASS");
+//			System.out.println("PASS");
 			return lastCard;
 			
 		default:
@@ -140,7 +140,7 @@ public class ComputerHand extends Hand {
 		}
 		
 		
-		System.out.println("PASS");
+//		System.out.println("PASS");
 		return lastCard;
 	}
 
