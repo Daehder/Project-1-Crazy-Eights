@@ -49,10 +49,11 @@ public class ComputerHand extends Hand {
 		findPlayableCards(hand, lastCard);
 		
 		//Add a parameter for max draw.
-		while(playableCards.isEmpty() && eights.isEmpty()){
+		int drawNum = 0;
+		while(playableCards.isEmpty() && eights.isEmpty() && drawNum < 3){
 			hand.add(deck.Deal());
 			findPlayableCards(hand, lastCard);
-			
+			drawNum++;
 		}
 		
 		int play;
@@ -133,7 +134,7 @@ public class ComputerHand extends Hand {
 		}
 		
 		
-		System.out.println("DID NOT PLAY");
+		System.out.println("PASS");
 		return lastCard;
 	}
 
