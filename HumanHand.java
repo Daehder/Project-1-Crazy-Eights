@@ -6,7 +6,7 @@ import java.util.Scanner;
  * 
  * @author Erik
  */
-public class HumanHand extends Hand {
+public class HumanHand extends Hand {	
 	/**
 	 * 
 	 */
@@ -32,6 +32,7 @@ public class HumanHand extends Hand {
 		Scanner in = new Scanner(System.in);
 		Card play = lastCard;		// Gets passed back to become the new lastCard
 									// set to lastCard so that if the user draws or quits, lastCard is passed back
+		int cardsDrawn = 0;
 		
 		char response = 'x';
 		while (response == 'x')
@@ -49,6 +50,7 @@ public class HumanHand extends Hand {
 			}
 			else if (response == 'p' || response == 'P')
 			{
+				
 				play = playCards(lastCard, in);
 				if(lastCard.toString().equals(play.toString())) {	// Since Cards are not comparable, compare their strings
 						// If the played card is the same as the last card played, nothing has changed, so ask them to pick again
@@ -59,11 +61,17 @@ public class HumanHand extends Hand {
 			}
 			else if ((response == 'd' || response == 'D'))
 			{
-				add(deck.Deal());
-				System.out.println("Drew " + hand.get(hand.size() - 1) +
-									"\n(P) to play again or" +
-									"\n(E) to end your turn");
-				response = 'x';
+				if(cardsDrawn < 3){
+					add(deck.Deal());
+					System.out.println("Drew " + hand.get(hand.size() - 1) +
+										"\n(P) to play again or" +
+										"\n(E) to end your turn");
+					response = 'x';
+					cardsDrawn++;
+				}
+				else
+					System.out.println("You've drawn 3 cards. Please play or end your turn");
+					
 			}
 			else if (response == 'e' || response == 'E' ) 
 				break;
