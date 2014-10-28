@@ -105,19 +105,6 @@ public abstract class Hand
 			(a.getValue() == b.getValue()) ||
 			(a.getValue() == 7);
 	}
-   
-   /* Add to easyComputerHand
-    * public int firstPlayableLocation(Card c)
-   {
-      for (int i = 0; i < size(); i++)
-      {
-         if (isPlayable(get(i), c))
-         {
-            return i;
-         }
-      }
-      return -1;
-   }*/
 
 	public int size() {
 		return hand.size();
