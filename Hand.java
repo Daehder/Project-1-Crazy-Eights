@@ -1,8 +1,9 @@
 import java.util.ArrayList;
+import java.util.Scanner;
 
-public class Hand
+public abstract class Hand
 {
-	private ArrayList<Card> hand;
+	protected ArrayList<Card> hand;
 	private String name;
 	
 	public Hand()
@@ -23,27 +24,14 @@ public class Hand
 		this.name = name;
 	}
 	
+	public abstract Card takeTurn(Card lastCard, Deck deck);
+	
 	public void add(Card c)
 	{
 		if (c == null)
 			System.out.println("Out of cards");
 		else 
 			hand.add(c);
-	}
-	
-	public Card remove(int i)
-	{
-		return hand.remove(i);
-	}
-	
-	public Card get(int i)
-	{
-		return hand.get(i);
-	}
-	
-	public int size()
-	{
-		return hand.size();
 	}
 	
 	public String name()
@@ -118,7 +106,8 @@ public class Hand
 			(a.getValue() == 7);
 	}
    
-   public int firstPlayableLocation(Card c)
+   /* Add to easyComputerHand
+    * public int firstPlayableLocation(Card c)
    {
       for (int i = 0; i < size(); i++)
       {
@@ -128,5 +117,9 @@ public class Hand
          }
       }
       return -1;
-   }
+   }*/
+
+	public int size() {
+		return hand.size();
+	}
 }
