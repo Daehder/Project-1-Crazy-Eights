@@ -45,29 +45,11 @@ public class CrazyEightsGame
 		{
 			lastCard = p1.takeTurn(lastCard, deck);
 			lastCard = p2.takeTurn(lastCard, deck);
+			System.out.println(	"\n\n\n\n\n\n\n\n\n\n\n\n\n\n" +
+								"The computer played " + lastCard + 
+								" and has " + ((ComputerHand) p2).handSize() + " cards left" );
 		}
 	}
-   
-   /* Separate out into EasyComputerHand
-    * private Card artificialIntelligence(Deck d, Hand p2, Card lastCard)
-	{
-      System.out.println(p2.name() + " has " + p2.size() + " cards in their hand.");
-		if (p2.hasPlay(lastCard))
-      {
-         int loc = p2.firstPlayableLocation(lastCard);
-         Card c = p2.remove(loc);
-         System.out.println(p2.name() + " played the " + c);
-         System.out.println(p2.name() + " has " + p2.size() + " cards in their hand.");
-         return c;
-      }
-      else 
-      {
-         System.out.println(p2.name() + " drew a card.");
-         p2.add(d.dequeue());
-         System.out.println(p2.name() + " has " + p2.size() + " cards in their hand.");
-         return lastCard;
-      }
-	}*/
 	
 	private boolean gameOver()
 	{
