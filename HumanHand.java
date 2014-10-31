@@ -114,6 +114,8 @@ public class HumanHand extends Hand {
 					test = hand.get(nextInt);	// Get the card at that spot
 					if(test.getValue() == 7){	// If the card is an 8
 						myCard = crazyEight(in);
+						hand.remove(nextInt);		// Makes sure the 8 is discarded
+						hand.add(myCard);
 						System.out.println("Trying to play the " + test);
 						cardsToPlay.add(myCard);
 					}
