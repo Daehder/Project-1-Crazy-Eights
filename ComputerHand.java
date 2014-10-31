@@ -164,10 +164,8 @@ public class ComputerHand extends Hand {
 		lastPlayedCard = lastCard;
 		return lastCard;
 	}
-
-	protected Card crazyEight(Scanner in) {
-		return null;
-		// TODO Auto-generated method stub
-		
+	
+	public int handSize(){
+		return hand.size();
 	}
 }

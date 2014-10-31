@@ -35,7 +35,7 @@ public class EasyComputerHand extends Hand {
 	 * 
 	 * @param lastCard The last card played
 	 * @param The deck of cards (for drawing cards)
-	 * @return The card played
+	 * @return The card played 
 	 */
 	@Override
 	public Card takeTurn(Card lastCard, Deck deck) {
